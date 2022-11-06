@@ -29,25 +29,37 @@ export const calculator = {
 //Don’t forget to test keeping the same if.
 //Don’t forget to test punctuation!
 //For this one, you may want to split the final function into a few smaller functions. One concept of Testing is that you don’t need to explicitly test every function you write… Just the public ones. So in this if you only need tests for the final caesarCipher function. If it works as expected you can rest assured that your smaller helper functions are doing what they’re supposed to.
+
+
 export function caesarCipher(input) {
     let newString = ''
 
     for (const i in input) {
-        const extranum = getNumberCount(input.charCodeAt(i))
+        const CharCode = input.charCodeAt(i)
+        const extranum = getNumberCount(CharCode)
         const divider = getDivider(extranum)
-        let integ = ((input.charCodeAt(i)) - extranum) % divider
-        integ = extranum + integ
+        let beforeDivide = ((input.charCodeAt(i)) - extranum)
+        let integ =beforeDivide + 1
+        if(integ > divider) {
+            integ = integ % divider
+            integ--
+            }
+        integ = integ + extranum
+
         let char =String.fromCharCode(integ)
         newString += char
     }
         return newString;
     }
+
+
+// caesarCipher('abd')
 function getDivider(num) {
     if(num ===0) {
         return 47
     }
-    if(num ===(65 | 97)) {
-        return 24
+    if((num ===65) |(num === 97)) {
+        return 25
     }
     return 6
     }
@@ -59,9 +71,8 @@ function getNumberCount(char) {
     if (char < 97){
     return 91;
     }
-    if(char>122) {
+    if(char<123) {
         return 97}
-    
     }
 
 
@@ -75,7 +86,30 @@ function getNumberCount(char) {
 //  max: 8,
 //  length: 6
 //  };
-function analizeArray() {
+export function analizeArray(array) {
+    const obj = {}
+    obj.average = calcAVG(array)
+    obj.min = getMin(array)
+    obj.max = getMax(array)
+    obj.len = array.length
+    return obj
 
 }
+
+function getMax(array) {
+    let max = array[0]
+    array.forEach(el => {if(el>max) {max =el}})
+    return max
+}
+
+function getMin(array) {
+    let min = array[0]
+    array.forEach(el => {if(el<min) {min = el}})
+    return min
+}
+function calcAVG(array) {
+    const sum = array.reduce((prev, curr) => prev + curr)
+    return Math.floor(sum / array.length)
+}
+
 

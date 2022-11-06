@@ -2,9 +2,19 @@ import {
     reverse,
     calculator,
     capitalize,
-    caesarCipher
+    caesarCipher,
+    analizeArray
 
 } from "./index";
+import expect from "expect";
+
+function allASCII() {
+    for (let i = 0; i < 127; i++) {
+        console.log(i, String.fromCharCode(i))
+    }
+}
+
+// allASCII()
 
 //  A capitalize function that takes a string and returns it with the first character capitalized.
 test('check capitalize function', () => {expect(capitalize('hello')).toBe('HELLO')})
@@ -16,13 +26,24 @@ test('another test reverse', () => {expect(reverse('Howdy')).toBe('ydwoH')})
 //A calculator object that contains functions for the basic operations: add, subtract, divide, and multiply. Each of these functions should take two numbers and return the correct calculation.
 
 test('testing calc', () => {expect(calculator.add(3, 5)).toBe(8 )})
-test('testing calc', () => {expect(calculator.divide(10, 5)).toBe(2 )})
-test('testing calc', () => {expect(calculator.multiply(10, 5)).toBe(50)})
+test('testing calc2', () => {expect(calculator.divide(10, 5)).toBe(2 )})
+test('testing calc3', () => {expect(calculator.multiply(10, 5)).toBe(50)})
 
 test('testing caesar', () => {expect(caesarCipher('abc')).toBe('bcd')})
-test('testing caesar', () => {expect(caesarCipher('XYZ')).toBe('YZA')})
-test('testing caesar', () => {expect(caesarCipher('ACB')).toBe('BCD')})
+test('testing caesar2', () => {expect(caesarCipher('AXYZ')).toBe('BYZA')})
+test('testing caesar3', () => {expect(caesarCipher('ACB')).toBe('BDC')})
+test('testing caesar4', () => {expect(caesarCipher('xyz')).toBe('yza')})
 
+
+const array = [1, 3, 5, 3, 2]
+
+const resultExpected = {
+    max: 5,
+    min: 1,
+    average: 2,
+    len: 5
+}
+test('analyzeTest 1', () => {expect(analizeArray(array)).toStrictEqual(resultExpected)})
 
 
 //A caesarCipher function that takes a string and returns it with each character “shifted”. Read more about how a Caesar cipher works on this website.
